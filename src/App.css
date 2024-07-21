@@ -16,6 +16,19 @@
 .grid-cell {
     border: 1px solid black;
 }
+
+.entity {
+    height: 100%;
+    width: 100%;
+}
+
+.snake {
+    background-color: purple;
+}
+
+.fruit {
+    background-color: red;
+}
 /*
 #root {
   max-width: 1280px;
