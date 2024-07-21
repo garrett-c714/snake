@@ -17,6 +17,12 @@
     border: 1px solid black;
 }
 
+.game-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .entity {
     height: 100%;
     width: 100%;
