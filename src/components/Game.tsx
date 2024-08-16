@@ -13,6 +13,12 @@ const Game = () => {
 	's': 's',
 	'd': 'e'
     }
+    const oppositeDirections = {
+	'n': 's',
+	's': 'n',
+	'w': 'e',
+	'e': 'w'
+    }
 
     const [dir, setDir] = useState('e');
     const dirRef = useRef(dir);
@@ -20,6 +26,17 @@ const Game = () => {
     const [fruitPos, setFruitPos] = useState([randInt(1, GRID_SIZE),randInt(1,GRID_SIZE)]);
     const [score, setScore] = useState(0);
 
+    const getRandomPos = () => {
+	return [randInt(1, GRID_SIZE), randInt(1, GRID_SIZE)];
+    }
+    
+    const handleResetBtnClick = () => {
+	setDir('e');
+	setSnakePos([1,1]);
+	setScore(0);
+	setFruitPos(getRandomPos());
+    }
+    
     const moveSnake = dir  => {
 	setSnakePos(([oldX, oldY]) => {
 	    let newX = oldX;
@@ -56,7 +73,11 @@ const Game = () => {
     
     const handleKeyDown = event => {
 	console.log(`${event.key} key was pressed!`);
-	setDir(keyToDir[event.key]);
+	const DIRECTION_KEYS = ['w', 'a', 's', 'd'];
+	if (DIRECTION_KEYS.includes(event.key)
+	   && keyToDir[event.key] !== oppositeDirections[dirRef.current]) {
+	    setDir(keyToDir[event.key]);
+	}
     }
 
     // Direction Updates
@@ -70,7 +91,6 @@ const Game = () => {
 	    moveSnake(dirRef.current);
 	}
 
-	//const intervalId = 0;
 	 const intervalId = setInterval(tick, 150);
 
 	return () => {clearInterval(intervalId)}
@@ -80,7 +100,7 @@ const Game = () => {
     // Check if fruit is eated
     useEffect(() => {
 	if (snakePos[0] === fruitPos[0] && snakePos[1] === fruitPos[1]) {
-	    setFruitPos([randInt(1, GRID_SIZE), randInt(1, GRID_SIZE)]);
+	    setFruitPos(getRandomPos());
 	    setScore(score + 1);
 	}
     }, [snakePos]);
@@ -88,7 +108,10 @@ const Game = () => {
     return (
 	<div className="game-column">
 	    <GlobalKeyHandler handleKeyDown={handleKeyDown} />
-	    <p>Score: {score}</p>
+	    <div className="game-toolbar">
+		<p>Score: {score}</p>
+		<button onClick={handleResetBtnClick}>Reset</button>
+	    </div>
 	    <Grid size={GRID_SIZE}
 		  snakePos={snakePos}
 		  fruitPos={fruitPos}
