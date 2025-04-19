@@ -4,7 +4,7 @@ import Entity from './Entity'
 
 const Grid = props => {
 
-    const {size, snakePos, fruitPos} = props;
+    const {size, score, snakePos, fruitPos} = props;
 
     const gridStyle = {
 	gridTemplateRows: `repeat(${size}, 1fr)`,
@@ -13,10 +13,10 @@ const Grid = props => {
     
     return (
 	<div className="grid" style={gridStyle}>
-	    {Array.from({length: (size**2)-2}).map((_, index) =>
+	    {Array.from({length: (size**2)-(score + 1)}).map((_, index) =>
 		<div key={`grid-item-${index}`} className="grid-cell"></div>
 	    )}
-	    <Entity type="snake" pos={snakePos} />
+	    {/*<Entity type="snake" pos={snakePos} />*/}
 	    <Entity type="fruit" pos={fruitPos} />
 	</div>
     );
