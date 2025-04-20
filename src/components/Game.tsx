@@ -111,10 +111,11 @@ const Game = () => {
                 <p>Score: {score}</p>
                 <button onClick={handleResetBtnClick}>Reset</button>
             </div>
-            <Grid size={GRID_SIZE}
-              snakePos={snakePos}
-              fruitPos={fruitPos}
-              score={score}
+            <Grid 
+                size={GRID_SIZE}
+                snakePos={snakePos}
+                fruitPos={fruitPos}
+                score={score}
             />
         </div>
     );

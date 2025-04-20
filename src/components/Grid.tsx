@@ -12,15 +12,15 @@ const Grid = props => {
     }
     
     return (
-	<div className="grid" style={gridStyle}>
-	    {Array.from({length: (size**2)-(score + 1)}).map((_, index) =>
-		<div key={`grid-item-${index}`} className="grid-cell"></div>
-	    )}
-	    {/*<Entity type="snake" pos={snakePos} />*/}
-	    <Entity type="fruit" pos={fruitPos} />
-	</div>
+        <div className="grid" style={gridStyle}>
+            {Array.from({length: (size**2) - 2}).map((_, index) =>
+                <div key={`grid-item-${index}`} className="grid-cell"></div>
+            )}
+            <Entity type="snake" pos={snakePos} />
+            <Entity type="fruit" pos={fruitPos} />
+        </div>
     );
-    
 }
 
 export default Grid;
+
