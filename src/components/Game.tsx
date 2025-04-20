@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from "react";
+import { useState, useEffect, useRef } from "react";
 import { randInt } from "../utils.ts";
 
 import GlobalKeyHandler from "./GlobalKeyHandler";
@@ -7,26 +7,26 @@ import Grid from './Grid';
 const Game = () => {
 
     const GRID_SIZE = 25;
-    const keyToDir = {
+    const keyToDir: Record<string, string> = {
         'w': 'n',
         'a': 'w',
         's': 's',
         'd': 'e'
     }
-    const oppositeDirections = {
+    const oppositeDirections: Record<string, string> = {
         'n': 's',
         's': 'n',
         'w': 'e',
         'e': 'w'
     }
 
-    const [dir, setDir] = useState('e');
-    const dirRef = useRef(dir);
-    const [snakePos, setSnakePos] = useState([1,1]);
-    const [fruitPos, setFruitPos] = useState([randInt(1, GRID_SIZE),randInt(1,GRID_SIZE)]);
-    const [score, setScore] = useState(0);
+    const [dir, setDir] = useState<string>('e');
+    const dirRef = useRef<string>(dir);
+    const [snakePos, setSnakePos] = useState<number[]>([1,1]);
+    const [fruitPos, setFruitPos] = useState<number[]>(() => getRandomPos());
+    const [score, setScore] = useState<number>(0);
 
-    const getRandomPos = () => {
+    function getRandomPos() {
         return [randInt(1, GRID_SIZE), randInt(1, GRID_SIZE)];
     }
     
@@ -37,7 +37,7 @@ const Game = () => {
         setFruitPos(getRandomPos());
     }
     
-    const moveSnake = dir  => {
+    const moveSnake = (dir: string) => {
         setSnakePos(([oldX, oldY]) => {
             let newX = oldX;
             let newY = oldY;
@@ -70,7 +70,7 @@ const Game = () => {
     }
 
     
-    const handleKeyDown = event => {
+    const handleKeyDown = (event: KeyboardEvent) => {
         console.log(`${event.key} key was pressed!`);
         const DIRECTION_KEYS = ['w', 'a', 's', 'd'];
         if (DIRECTION_KEYS.includes(event.key)

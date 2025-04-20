@@ -1,21 +1,28 @@
-import React from "react";
+//import React from "react";
+import { EntityType } from "../types"
 
-const Entity = props => {
+interface Props {
+    type: EntityType;
+    pos: number[];
+}
 
-    const {pos, type} = props;
+const Entity = (props: Props) => {
+
+    const { pos, type } = props;
     const [x, y] = pos;
     
     const entityStyle = {
-	gridColumnStart: x,
-	gridColumnEnd: x+1,
-	gridRowStart: y,
-	gridRowEnd: y+1
+        gridColumnStart: x,
+        gridColumnEnd: x+1,
+        gridRowStart: y,
+        gridRowEnd: y+1
     }
     
     return (
-	<div className={`entity ${type}`} style={entityStyle}></div>
+        <div className={`entity ${type}`} style={entityStyle}></div>
     );
 
 }
 
 export default Entity;
+

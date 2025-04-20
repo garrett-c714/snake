@@ -1,14 +1,21 @@
-import React from "react";
+//import React from "react";
 
 import Entity from './Entity'
 
-const Grid = props => {
+interface Props {
+    size: number;
+    snakePos: number[];
+    fruitPos: number[];
+    score: number;
+}
 
-    const {size, score, snakePos, fruitPos} = props;
+const Grid = (props: Props) => {
+
+    const { size, snakePos, fruitPos } = props;
 
     const gridStyle = {
-	gridTemplateRows: `repeat(${size}, 1fr)`,
-	gridTemplateColumns: `repeat(${size}, 1fr)`
+        gridTemplateRows: `repeat(${size}, 1fr)`,
+        gridTemplateColumns: `repeat(${size}, 1fr)`
     }
     
     return (
