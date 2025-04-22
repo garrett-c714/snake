@@ -111,7 +111,13 @@ const Game = () => {
     // Check if fruit is eated
     useEffect(() => {
         if (snakePos[0][0] === fruitPos[0] && snakePos[0][1] === fruitPos[1]) {
-            setFruitPos(getRandomPos());
+            setFruitPos(() => {
+                let pos = getRandomPos();
+                while (snakePos.includes(pos)) {
+                    pos = getRandomPos();
+                }
+                return pos;
+            });
             setScore(score + 1);
             setSnakePos([...snakePos, lastExited]);
         }
