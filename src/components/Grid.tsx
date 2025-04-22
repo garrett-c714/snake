@@ -4,7 +4,7 @@ import Entity from './Entity'
 
 interface Props {
     size: number;
-    snakePos: number[];
+    snakePos: number[][];
     fruitPos: number[];
     score: number;
 }
@@ -17,13 +17,17 @@ const Grid = (props: Props) => {
         gridTemplateRows: `repeat(${size}, 1fr)`,
         gridTemplateColumns: `repeat(${size}, 1fr)`
     }
+
+    const numEmptyGridCells = (size**2) - (snakePos.length + 1);
     
     return (
         <div className="grid" style={gridStyle}>
-            {Array.from({length: (size**2) - 2}).map((_, index) =>
+            {Array.from({length: numEmptyGridCells}).map((_, index) =>
                 <div key={`grid-item-${index}`} className="grid-cell"></div>
             )}
-            <Entity type="snake" pos={snakePos} />
+            {snakePos.map(pos =>
+                <Entity type="snake" pos={pos} />
+            )}
             <Entity type="fruit" pos={fruitPos} />
         </div>
     );
